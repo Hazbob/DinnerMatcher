@@ -6,6 +6,6 @@ namespace DinnerMatcherNew.Models
         public required string Username { get; set; }
         public required string Email { get; set; }
         public required string Password { get; set; }
-        public IEnumerable<User>? Friends { get; set; }
+        public ICollection<Friendship> Friendships { get; set; }
     }
 }
