@@ -24,11 +24,18 @@ namespace DinnerMatcherNew.DataContext
                 .WithMany()
                 .HasForeignKey(f => f.UserId2)
                 .OnDelete(DeleteBehavior.Restrict); // or Cascade if desired
+            // modelBuilder.Entity<Game>()
+            //     .HasMany(e => e.Users)
+            //     .WithMany(e => e.Games);
         }
         public DbSet<User?> Users { get; set; }
         public DbSet<Restaurant?> Restaurants { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
         
-        
+        public DbSet<Game> Games { get; set; }
+
+        public DbSet<Game_User> GameUsers { get; set; }
+
+
     }
 }
