@@ -1,3 +1,4 @@
+using DinnerMatcherNew;
 using DinnerMatcherNew.DataContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +10,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DinnerContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DinnerMatcher")));
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
