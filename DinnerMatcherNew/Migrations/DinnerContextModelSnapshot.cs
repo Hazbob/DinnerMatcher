@@ -44,6 +44,48 @@ namespace DinnerMatcherNew.Migrations
                     b.ToTable("Friendships");
                 });
 
+            modelBuilder.Entity("DinnerMatcherNew.Models.Game", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("LatitudeMain")
+                        .HasColumnType("float");
+
+                    b.Property<double>("LongitudeMain")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("DinnerMatcherNew.Models.Game_User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("GameUsers");
+                });
+
             modelBuilder.Entity("DinnerMatcherNew.Models.Restaurant", b =>
                 {
                     b.Property<int>("Id")
@@ -108,6 +150,21 @@ namespace DinnerMatcherNew.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("GameUser", b =>
+                {
+                    b.Property<int>("GamesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GamesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("GameUser");
+                });
+
             modelBuilder.Entity("DinnerMatcherNew.Models.Friendship", b =>
                 {
                     b.HasOne("DinnerMatcherNew.Models.User", "User1")
@@ -127,9 +184,50 @@ namespace DinnerMatcherNew.Migrations
                     b.Navigation("User2");
                 });
 
+            modelBuilder.Entity("DinnerMatcherNew.Models.Game_User", b =>
+                {
+                    b.HasOne("DinnerMatcherNew.Models.Game", "Game")
+                        .WithMany("GameUsers")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DinnerMatcherNew.Models.User", "User")
+                        .WithMany("GameUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GameUser", b =>
+                {
+                    b.HasOne("DinnerMatcherNew.Models.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GamesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DinnerMatcherNew.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DinnerMatcherNew.Models.Game", b =>
+                {
+                    b.Navigation("GameUsers");
+                });
+
             modelBuilder.Entity("DinnerMatcherNew.Models.User", b =>
                 {
                     b.Navigation("Friendships");
+
+                    b.Navigation("GameUsers");
                 });
 #pragma warning restore 612, 618
         }
