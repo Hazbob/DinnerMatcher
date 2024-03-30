@@ -1,10 +1,11 @@
 using DinnerMatcherNew.Models;
 
-namespace DinnerMatcherNew
+namespace DinnerMatcherNew.Interfaces
 {
     public interface IRestaurantRepository
     {
-        IEnumerable<Restaurant> GetRestaurants();
-        
+        IEnumerable<Restaurant?> GetRestaurants();
+
+        Restaurant? GetRestaurant(int restaurantId);
     }
 }
