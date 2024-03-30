@@ -25,7 +25,7 @@ namespace DinnerMatcherNew.DataContext
                 .HasForeignKey(f => f.UserId2)
                 .OnDelete(DeleteBehavior.Restrict); // or Cascade if desired
         }
-        public DbSet<User> Users { get; set; }
+        public DbSet<User?> Users { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
         
