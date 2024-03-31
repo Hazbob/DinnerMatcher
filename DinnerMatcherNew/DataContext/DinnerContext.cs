@@ -5,31 +5,33 @@ namespace DinnerMatcherNew.DataContext
 {
     public class DinnerContext: DbContext
     {
-        public DinnerContext(DbContextOptions<DinnerContext> options): base(options)
+        public DinnerContext(DbContextOptions<DinnerContext> options) : base(options)
         {
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Friendship>()
-                .HasKey(f => f.FriendshipId);
+                .HasKey(f => f.Id);
 
             modelBuilder.Entity<Friendship>()
-                .HasOne(f => f.User1)
-                .WithMany(u => u.Friendships)
-                .HasForeignKey(f => f.UserId1)
-                .OnDelete(DeleteBehavior.Restrict); // or Cascade if desired
+                .HasOne(f => f.FirstUser)
+                .WithMany(u => u.FirstUserFriendships)
+                .HasForeignKey(f => f.FirstUserId)
+                .HasConstraintName("FK_Friendships_Users_FirstUser")
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Friendship>()
-                .HasOne(f => f.User2)
-                .WithMany()
-                .HasForeignKey(f => f.UserId2)
-                .OnDelete(DeleteBehavior.Restrict); // or Cascade if desired
-            // modelBuilder.Entity<Game>()
-            //     .HasMany(e => e.Users)
-            //     .WithMany(e => e.Games);
+                .HasOne(f => f.SecondUser)
+                .WithMany(u => u.SecondUserFriendships)
+                .HasForeignKey(f => f.SecondUserId)
+                .HasConstraintName("FK_Friendships_Users_SecondUser")
+                .OnDelete(DeleteBehavior.Restrict);
         }
-        public DbSet<User?> Users { get; set; }
-        public DbSet<Restaurant?> Restaurants { get; set; }
+
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
         
         public DbSet<Game> Games { get; set; }

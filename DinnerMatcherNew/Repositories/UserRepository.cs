@@ -22,7 +22,8 @@ namespace DinnerMatcherNew.Repositories
 
         public IEnumerable<Friendship> GetFriends(int userId)
         {
-            return _DinnerContext.Friendships.Where(f => f.UserId1 == userId || f.UserId2 == userId).ToList();
+            // right now this doesnt check if accepted or not
+            return _DinnerContext.Friendships.Where(f => f.FirstUserId == userId || f.SecondUserId == userId).ToList();
         }
 
         public async Task<User> CreateUserAsync(string username, string email, string password)
