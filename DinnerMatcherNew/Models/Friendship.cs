@@ -2,13 +2,10 @@ namespace DinnerMatcherNew.Models
 {
     public class Friendship
     {
-        public int FriendshipId { get; set; }
-        public int UserId1 { get; set; }
-        public int UserId2 { get; set; }
-
-        public User User1 { get; set; }
-        public User User2 { get; set; }
+        public int Id { get; set; }
+        public int FirstUserId { get; set; }
+        public int SecondUserId { get; set; }
+        public User FirstUser { get; set; }
+        public User SecondUser { get; set; }
     }
-    
-    
 }
