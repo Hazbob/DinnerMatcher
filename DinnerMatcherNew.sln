@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerMatcherNew", "DinnerMatcherNew\DinnerMatcherNew.csproj", "{0FAE27C5-5810-4EBD-9DA6-4D73A4873C5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerMatcher.Tests", "DinnerMatcher.Tests\DinnerMatcher.Tests.csproj", "{2AF1B8A2-0B42-4984-8B19-AC6AB5CBE58E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0FAE27C5-5810-4EBD-9DA6-4D73A4873C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FAE27C5-5810-4EBD-9DA6-4D73A4873C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FAE27C5-5810-4EBD-9DA6-4D73A4873C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AF1B8A2-0B42-4984-8B19-AC6AB5CBE58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF1B8A2-0B42-4984-8B19-AC6AB5CBE58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF1B8A2-0B42-4984-8B19-AC6AB5CBE58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF1B8A2-0B42-4984-8B19-AC6AB5CBE58E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

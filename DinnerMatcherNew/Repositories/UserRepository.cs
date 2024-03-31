@@ -24,5 +24,20 @@ namespace DinnerMatcherNew.Repositories
         {
             return _DinnerContext.Friendships.Where(f => f.UserId1 == userId || f.UserId2 == userId).ToList();
         }
+
+        public async Task<User> CreateUserAsync(string username, string email, string password)
+        {
+            var newUser = new User()
+            {
+                Username = username,
+                Email = email,
+                Password = password
+            };
+             _DinnerContext.Users.Add(newUser);
+             await _DinnerContext.SaveChangesAsync();
+
+             return newUser;
+
+        }
     }
 }
