@@ -2,6 +2,7 @@ using DinnerMatcherNew;
 using DinnerMatcherNew.DataContext;
 using DinnerMatcherNew.Interfaces;
 using DinnerMatcherNew.Repositories;
+using DinnerMatcherNew.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -17,6 +18,9 @@ builder.Services.AddControllers();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.TryAddScoped<IRestaurantRepository, RestaurantRepository>();
 builder.Services.TryAddScoped<IUserRepository, UserRepository>();
+builder.Services.TryAddScoped<IServiceRestaurant, ServiceRestaurant>();
+builder.Services.TryAddScoped<IServiceGame, ServiceGame>();
+builder.Services.TryAddScoped<IGameRepository, GameRepository>();
 var app = builder.Build();
 
 
@@ -30,4 +34,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.Run();
+app.Run();    
+
+
