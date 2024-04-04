@@ -3,6 +3,7 @@ using DinnerMatcherNew.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DinnerMatcherNew.Migrations
 {
     [DbContext(typeof(DinnerContext))]
-    partial class DinnerContextModelSnapshot : ModelSnapshot
+    [Migration("20240402155653_seedp")]
+    partial class seedp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,16 +38,11 @@ namespace DinnerMatcherNew.Migrations
                     b.Property<int>("SecondUserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FirstUserId");
 
                     b.HasIndex("SecondUserId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Friendships");
                 });
@@ -70,15 +68,6 @@ namespace DinnerMatcherNew.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Games");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            LatitudeMain = 0.0,
-                            LikedRestaurant_Ids = "[1]",
-                            LongitudeMain = 0.0
-                        });
                 });
 
             modelBuilder.Entity("DinnerMatcherNew.Models.Game_User", b =>
@@ -102,20 +91,6 @@ namespace DinnerMatcherNew.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("GameUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            GameId = 1,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            GameId = 1,
-                            UserId = 2
-                        });
                 });
 
             modelBuilder.Entity("DinnerMatcherNew.Models.Restaurant", b =>
@@ -442,10 +417,6 @@ namespace DinnerMatcherNew.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Friendships_Users_SecondUser");
 
-                    b.HasOne("DinnerMatcherNew.Models.User", null)
-                        .WithMany("Friends")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("FirstUser");
 
                     b.Navigation("SecondUser");
@@ -508,8 +479,6 @@ namespace DinnerMatcherNew.Migrations
             modelBuilder.Entity("DinnerMatcherNew.Models.User", b =>
                 {
                     b.Navigation("FirstUserFriendships");
-
-                    b.Navigation("Friends");
 
                     b.Navigation("GameUsers");
 

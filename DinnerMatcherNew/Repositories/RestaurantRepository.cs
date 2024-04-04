@@ -14,12 +14,12 @@ namespace DinnerMatcherNew.Repositories
             _dinnerContext = dinnerContext;
         }
 
-        public IEnumerable<Restaurant?> GetRestaurants()
+        public async Task<IEnumerable<Restaurant?>> GetRestaurants()
         {
             return _dinnerContext.Restaurants;
         }
 
-        public Restaurant? GetRestaurant(int restaurantId)
+        public Restaurant? GetRestaurantById(int restaurantId)
         {
             return _dinnerContext.Restaurants.FirstOrDefault(r => r != null && r.Id == restaurantId);
         }

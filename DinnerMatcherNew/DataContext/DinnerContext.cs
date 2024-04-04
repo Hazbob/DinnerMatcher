@@ -1,3 +1,4 @@
+using DinnerMatcherNew.Data;
 using DinnerMatcherNew.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,22 +12,30 @@ namespace DinnerMatcherNew.DataContext
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
+            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<Friendship>()
                 .HasKey(f => f.Id);
-
+            
             modelBuilder.Entity<Friendship>()
                 .HasOne(f => f.FirstUser)
                 .WithMany(u => u.FirstUserFriendships)
                 .HasForeignKey(f => f.FirstUserId)
                 .HasConstraintName("FK_Friendships_Users_FirstUser")
                 .OnDelete(DeleteBehavior.Restrict);
-
+            
             modelBuilder.Entity<Friendship>()
                 .HasOne(f => f.SecondUser)
                 .WithMany(u => u.SecondUserFriendships)
                 .HasForeignKey(f => f.SecondUserId)
                 .HasConstraintName("FK_Friendships_Users_SecondUser")
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Game>()
+                .HasMany<Restaurant>(g => g.Restaurants)
+                .WithMany(r => r.Games);
+            modelBuilder.Seed();
         }
 
 

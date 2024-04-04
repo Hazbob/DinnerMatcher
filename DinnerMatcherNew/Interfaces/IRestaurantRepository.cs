@@ -4,8 +4,8 @@ namespace DinnerMatcherNew.Interfaces
 {
     public interface IRestaurantRepository
     {
-        IEnumerable<Restaurant?> GetRestaurants();
+        Task<IEnumerable<Restaurant?>> GetRestaurants();
 
-        Restaurant? GetRestaurant(int restaurantId);
+        Restaurant? GetRestaurantById(int restaurantId);
     }
 }
