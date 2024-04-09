@@ -12,5 +12,7 @@ namespace DinnerMatcherNew.Models
         public List<Game_User> GameUsers { get; set; }
         public List<int> LikedRestaurant_Ids { get; set; }
         public ICollection<Restaurant> Restaurants { get; set; }
+        public ICollection<Matches> Matches { get; set; }
+
     }
 }

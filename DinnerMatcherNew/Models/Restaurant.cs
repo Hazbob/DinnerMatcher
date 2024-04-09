@@ -11,5 +11,6 @@ namespace DinnerMatcherNew.Models
         public bool IsOpen { get; set; }
         public string? Summary { get; set; }
         public ICollection<Game>? Games { get; set; }
+        public ICollection<Matches> Matches { get; set; }
     }
 }

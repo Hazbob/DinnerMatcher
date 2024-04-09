@@ -17,6 +17,8 @@ namespace DinnerMatcherNew.Models
         public List<Friendship> Friends { get; set; }
         public ICollection<Friendship> FirstUserFriendships { get; set; }
         public ICollection<Friendship> SecondUserFriendships { get; set; }
+        public ICollection<Matches> Matches { get; set; }
+
         
     }
 }

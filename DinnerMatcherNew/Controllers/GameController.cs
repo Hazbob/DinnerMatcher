@@ -34,9 +34,11 @@ namespace DinnerMatcherNew.Controllers
                 await _gameService.AddRestaurantIdToLikes(gameId, restaurantId);
                 return Created();
             }
-            //here is if the restaurant already exists in the database
-            //this shouldnt return ok it should call the match found function
-            return Ok();
+            //check if any matches exist already
+            
+            //add to matches database
+            //send request with body that match was found
+            return Ok("Match Found");
 
 
         }
