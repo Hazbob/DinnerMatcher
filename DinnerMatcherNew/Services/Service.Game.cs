@@ -1,4 +1,5 @@
 using DinnerMatcherNew.Interfaces;
+using DinnerMatcherNew.Models;
 
 namespace DinnerMatcherNew.Services
 {
@@ -27,6 +28,12 @@ namespace DinnerMatcherNew.Services
         public async Task AddRestaurantIdToLikes(int gameId, int restaurantId)
         {
             await _gameRepository.AddLikedRestaurant(gameId, restaurantId);
+        }
+
+        public async Task<Game> CreateGame(int userId)
+        {
+           var game =  await _gameRepository.CreateGame(userId);
+           return game;
         }
     }
 }

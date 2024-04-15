@@ -34,7 +34,7 @@ namespace DinnerMatcherNew.Repositories
                 Email = email,
                 Password = password
             };
-             _DinnerContext.Users.Add(newUser);
+             await _DinnerContext.Users.AddAsync(newUser);
              await _DinnerContext.SaveChangesAsync();
 
              return newUser;

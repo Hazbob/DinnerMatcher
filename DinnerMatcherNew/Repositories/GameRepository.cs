@@ -12,11 +12,28 @@ namespace DinnerMatcherNew.Repositories
         {
             _dinnerContext = dinnerContext;
         }
+
+        public async Task<Game> CreateGame(int userId)
+        {
+            var user = await _dinnerContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user is null)
+                throw new ArgumentNullException();
+            Game newGame = new Game()
+            {
+                Users = new List<User>(){user}
+            };
+
+             await _dinnerContext.Games.AddAsync(newGame);
+             await _dinnerContext.SaveChangesAsync();
+            return newGame;
+        }
+
         public async Task<Restaurant?> CheckForRestaurant(int gameId, int restaurantId)
         {
-            var game = _dinnerContext.Games.FirstOrDefault(g => g.Id == gameId);
-            var foundRestaurantId = game?.LikedRestaurant_Ids?.FirstOrDefault(resId => resId == restaurantId);
-            var restaurant = _dinnerContext.Restaurants.FirstOrDefault(r => r.Id == foundRestaurantId);
+            var game =await  _dinnerContext.Games.FirstOrDefaultAsync(g => g.Id == gameId);
+            var foundRestaurantId =  game?.LikedRestaurant_Ids?.FirstOrDefault(resId => resId == restaurantId);
+            var restaurant = await _dinnerContext.Restaurants.FirstOrDefaultAsync(r => r.Id == foundRestaurantId);
+            await _dinnerContext.SaveChangesAsync();
             return restaurant;
         }
 

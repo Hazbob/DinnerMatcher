@@ -1,5 +1,6 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace DinnerMatcherNew.Models
 {
@@ -9,7 +10,7 @@ namespace DinnerMatcherNew.Models
         public  string Username { get; set; }
         public  string Email { get; set; }
         public  string Password { get; set; }
-        
+        [JsonIgnore]
         public ICollection<Game>? Games { get; set; }
         
         public List<Game_User> GameUsers { get; set; }

@@ -21,6 +21,9 @@ builder.Services.TryAddScoped<IUserRepository, UserRepository>();
 builder.Services.TryAddScoped<IServiceRestaurant, ServiceRestaurant>();
 builder.Services.TryAddScoped<IServiceGame, ServiceGame>();
 builder.Services.TryAddScoped<IGameRepository, GameRepository>();
+builder.Services.TryAddScoped<IServiceMatches, ServiceMatches>();
+builder.Services.TryAddScoped<IMatchesRepository, MatchesRepository>();
+
 var app = builder.Build();
 
 
