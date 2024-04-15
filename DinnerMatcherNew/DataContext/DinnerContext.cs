@@ -46,7 +46,7 @@ namespace DinnerMatcherNew.DataContext
         public DbSet<Game> Games { get; set; }
 
         public DbSet<Game_User> GameUsers { get; set; }
-        public DbSet<Matches> Matches { get; set; }
+        public DbSet<Matches?> Matches { get; set; }
 
 
     }

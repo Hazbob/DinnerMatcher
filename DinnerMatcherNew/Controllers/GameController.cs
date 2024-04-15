@@ -1,5 +1,6 @@
 
 using DinnerMatcherNew.Interfaces;
+using DinnerMatcherNew.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DinnerMatcherNew.Controllers
@@ -8,23 +9,35 @@ namespace DinnerMatcherNew.Controllers
     {
         private readonly IServiceRestaurant _serviceRestaurant;
         private readonly IServiceGame _gameService;
+        private readonly IServiceMatches _matchesService;
 
 
-        public GameController(IServiceRestaurant serviceRestaurant, IServiceGame gameService)
+        public GameController(IServiceRestaurant serviceRestaurant, IServiceGame gameService, IServiceMatches matchesService)
         {
             _serviceRestaurant = serviceRestaurant;
             _gameService = gameService;
+            _matchesService = matchesService;
         }
-        
-        
-        
+
+        [HttpPost("game")]
+        public async Task<IActionResult> CreateGame(int userId)
+        {
+            var game =await  _gameService.CreateGame(userId);
+            if (game is not null)
+            {
+                return Ok(game);
+            }
+            else
+            {
+                return BadRequest("failed to create game");
+            }
+        }
         
         // Post
         [HttpPost("game/{gameId}")]
-        public async Task<IActionResult> LikeRestaurantTask([FromQuery] int restaurantId, [FromRoute]int gameId)
+        public async Task<IActionResult> LikeRestaurantTask( int restaurantId, int gameId, int userId)
         {
             var restaurant = _serviceRestaurant.ServiceGetRestaurantById(restaurantId);
-
             if (restaurant is null)
                 return NotFound("No restaurant exists by that id");
             
@@ -34,13 +47,12 @@ namespace DinnerMatcherNew.Controllers
                 await _gameService.AddRestaurantIdToLikes(gameId, restaurantId);
                 return Created();
             }
-            //check if any matches exist already
+
+            await _matchesService.AddRestaurantIdToLikes(userId, gameId, restaurantId);
             
-            //add to matches database
-            //send request with body that match was found
             return Ok("Match Found");
-
-
+            
+            
         }
         
     }

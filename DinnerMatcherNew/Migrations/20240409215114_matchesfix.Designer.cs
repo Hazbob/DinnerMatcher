@@ -3,6 +3,7 @@ using DinnerMatcherNew.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DinnerMatcherNew.Migrations
 {
     [DbContext(typeof(DinnerContext))]
-    partial class DinnerContextModelSnapshot : ModelSnapshot
+    [Migration("20240409215114_matchesfix")]
+    partial class matchesfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,8 +60,15 @@ namespace DinnerMatcherNew.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<double>("LatitudeMain")
+                        .HasColumnType("float");
+
                     b.Property<string>("LikedRestaurant_Ids")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("LongitudeMain")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -68,7 +78,9 @@ namespace DinnerMatcherNew.Migrations
                         new
                         {
                             Id = 1,
-                            LikedRestaurant_Ids = "[1]"
+                            LatitudeMain = 0.0,
+                            LikedRestaurant_Ids = "[1]",
+                            LongitudeMain = 0.0
                         });
                 });
 

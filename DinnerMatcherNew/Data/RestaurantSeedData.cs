@@ -19,8 +19,6 @@ namespace DinnerMatcherNew.Data
                 new Game
                 {
                     Id = 1,
-                    LatitudeMain = 0.0,
-                    LongitudeMain = 0.0,
                     LikedRestaurant_Ids = new List<int>(){1},
                     Restaurants = null,
                     Users = null,
